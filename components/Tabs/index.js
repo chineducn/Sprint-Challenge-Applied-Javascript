@@ -20,7 +20,6 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
         });
     })
     .catch(rejectMe => {
-        // debugger
         const errorText = document.createElement('div');
         errorText.textContent = rejectMe.message;
         headerContainer.appendChild(errorText);
