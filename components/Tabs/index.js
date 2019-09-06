@@ -7,3 +7,5 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
+const tab = document.createElement('div');
+tab.classList.add('tab');
