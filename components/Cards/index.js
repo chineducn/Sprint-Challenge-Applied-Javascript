@@ -21,14 +21,6 @@
 
 //Actual code
 
-// axios.get('https://lambda-times-backend.herokuapp.com/articles')
-//     .then(articleYes => {
-//     debugger
-//     })
-//     .catch(articleNo => {
-//     debugger
-// })
-
 //Variable declaration
 const cardContainer = document.querySelector('.cards-container');
 const cardItem = document.createElement('div');
@@ -46,8 +38,7 @@ imageContainer.classList.add('img-container');
 imageItem.src = '..';
 
 //Value giving
-headlineItem.textContent = 'headline placeholder';
-
+headlineItem.textContent = 'placeholder-headline';
 
 //Appending
 imageContainer.appendChild(imageItem);
@@ -56,6 +47,18 @@ authorContainer.appendChild(authorItem);
 cardItem.appendChild(headlineItem);
 cardItem.appendChild(authorContainer);
 cardContainer.appendChild(cardItem);
+
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(articleYes => {
+        // debugger
+        
+        authorItem.textContent = articleYes.data.articles.bootstrap[0].authorName;
+    })
+    .catch(articleNo => {
+    debugger
+})
+
 
 
 
