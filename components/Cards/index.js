@@ -22,54 +22,51 @@
 //Actual code
 
 //Variable declaration
+
+function cardCreator(articleHeadline, imageSource, articleAuthor) {
+    const cardItem = document.createElement('div');
+    const headlineItem = document.createElement('div');
+    const authorContainer = document.createElement('div');
+    const imageContainer = document.createElement('div');
+    const imageItem = document.createElement('img');
+    const authorItem = document.createElement('span');
+
+    //Attributing
+    cardItem.classList.add('card');
+    headlineItem.classList.add('headline');
+    authorContainer.classList.add('author');
+    imageContainer.classList.add('img-container');
+
+    //Value giving
+    headlineItem.textContent = articleHeadline;
+    imageItem.src = imageSource;
+    authorItem.textContent = `By ${articleAuthor}`
+
+    //Appending
+    imageContainer.appendChild(imageItem);
+    authorContainer.appendChild(imageContainer);
+    authorContainer.appendChild(authorItem);
+    cardItem.appendChild(headlineItem);
+    cardItem.appendChild(authorContainer);
+
+    return cardItem;
+}
+
+
+
 const cardContainer = document.querySelector('.cards-container');
-const cardItem = document.createElement('div');
-const headlineItem = document.createElement('div');
-const authorContainer = document.createElement('div');
-const imageContainer = document.createElement('div');
-const imageItem = document.createElement('img');
-const authorItem = document.createElement('span');
-
-//Attributing
-cardItem.classList.add('card');
-headlineItem.classList.add('headline');
-authorContainer.classList.add('author');
-imageContainer.classList.add('img-container');
-imageItem.src = '..';
-
-//Value giving
-headlineItem.textContent = 'placeholder-headline';
-
-//Appending
-imageContainer.appendChild(imageItem);
-authorContainer.appendChild(imageContainer);
-authorContainer.appendChild(authorItem);
-cardItem.appendChild(headlineItem);
-cardItem.appendChild(authorContainer);
-cardContainer.appendChild(cardItem);
+// cardContainer.appendChild(cardItem);
 
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(articleYes => {
         // debugger
         
-        authorItem.textContent = articleYes.data.articles.bootstrap[0].authorName;
+        const newArticle = articleYes.data;
+        console.log(newArticle);
+        const newArticleObject = Array.from(newArticle);
+        console.log(newArticleObject);
     })
     .catch(articleNo => {
     debugger
 })
-
-
-
-
-
-
-
-//Test code
-console.log(cardItem);
-// console.log(headlineItem);
-// console.log(authorContainer);
-// console.log(imageContainer);
-// console.log(imageItem);
-// console.log(authorItem);
-// console.log(cardContainer)
