@@ -62,7 +62,6 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
         const dataObj = articleYes.data.articles;
         console.log(dataObj);
         for (const topic in dataObj) {
-            // const topicArray = Array.from(topic);
             const newCards = dataObj[topic].map(arrayItem => {
                 const newCard = cardCreator(
                     arrayItem.headline,
