@@ -17,3 +17,65 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+
+
+//Variable declaration
+
+function cardCreator(articleHeadline, imageSource, articleAuthor) {
+    const cardItem = document.createElement('div');
+    const headlineItem = document.createElement('div');
+    const authorContainer = document.createElement('div');
+    const imageContainer = document.createElement('div');
+    const imageItem = document.createElement('img');
+    const authorItem = document.createElement('span');
+
+    //Attributing
+    cardItem.classList.add('card');
+    headlineItem.classList.add('headline');
+    authorContainer.classList.add('author');
+    imageContainer.classList.add('img-container');
+
+    //Value giving
+    headlineItem.textContent = articleHeadline;
+    imageItem.src = imageSource;
+    authorItem.textContent = `By ${articleAuthor}`
+
+    //Appending
+    imageContainer.appendChild(imageItem);
+    authorContainer.appendChild(imageContainer);
+    authorContainer.appendChild(authorItem);
+    cardItem.appendChild(headlineItem);
+    cardItem.appendChild(authorContainer);
+
+    return cardItem;
+}
+
+const cardContainer = document.querySelector('.cards-container');
+
+
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(articleYes => {
+        // debugger
+        
+        const dataObj = articleYes.data.articles;
+        console.log(dataObj);
+        for (const topic in dataObj) {
+            const newCards = dataObj[topic].map(arrayItem => {
+                const newCard = cardCreator(
+                    arrayItem.headline,
+                    arrayItem.authorPhoto,
+                    arrayItem.authorName
+                )
+                return newCard;
+            })
+
+            newCards.forEach(card => {
+                cardContainer.appendChild(card);
+            })
+        }
+    })
+    .catch(articleNo => {
+        debugger
+    });
