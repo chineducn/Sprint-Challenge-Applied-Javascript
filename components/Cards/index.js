@@ -58,11 +58,10 @@ const cardContainer = document.querySelector('.cards-container');
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(articleYes => {
         // debugger
-        
-        const dataObj = articleYes.data.articles;
-        console.log(dataObj);
-        for (const topic in dataObj) {
-            const newCards = dataObj[topic].map(arrayItem => {
+        //Object destructuring
+        const { data:{ articles } } = articleYes;        
+        for (const topic in articles) {
+            const newCards = articles[topic].map(arrayItem => {
                 const newCard = cardCreator(
                     arrayItem.headline,
                     arrayItem.authorPhoto,
